@@ -50,7 +50,7 @@ Route::prefix('masterevent')->group(function () {
     Route::get('/', [EventController::class, 'index'])->name('events.index');
     Route::post('/', [EventController::class, 'store'])->name('events.store');
     Route::get('/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-    Route::put('/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::post('/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 });
 

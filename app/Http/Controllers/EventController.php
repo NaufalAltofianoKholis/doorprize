@@ -63,11 +63,13 @@ class EventController extends Controller
     }
 
     public function edit($id)
-{
-    $event = Event::findOrFail($id);
-
-    return view('events.edit', compact('event'));
-}
+    {
+        $event = Event::findOrFail($id);
+    
+        // Return event data as JSON
+        return response()->json($event);
+    }
+    
 
     /**
      * Update the specified resource in storage.
