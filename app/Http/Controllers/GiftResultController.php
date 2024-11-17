@@ -13,7 +13,10 @@ class GiftResultController extends Controller
      */
     public function index()
     {
-        //
+        $giftResults=GiftResult::all();
+
+
+        return view('pages.mastergiftresult',compact('giftResults'));
     }
 
     /**

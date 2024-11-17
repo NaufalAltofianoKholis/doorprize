@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Event Gifts Assignment</h1>
@@ -21,19 +20,30 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Event ID</th>
-                                <th>Gift ID</th>
-                                <th>Member ID</th>
+                                <th>Event Name</th>
+                                <th>Gift Name</th>
+                                <th>Member Name</th> 
+                                <th>Status Delivery</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 1; $i <= 5; $i++)
+                            @foreach($giftResults as $giftResult)
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $i + 10 }}</td>
-                                <td>{{ $i + 20 }}</td>
+                                <td>{{ $giftResult->event->name }}</td>
+                                <td>{{ $giftResult->gift->name }}</td>
+                                <td>{{ $giftResult->member->name }}</td>
+                                <td>{{ $giftResult->status }}</td>    
                             </tr>
-                            @endfor
+                            @endforeach
+                            {{-- @foreach ($assignedGifts as $assignedGift)
+                            <tr>
+                                <td>{{ $assignedGift->event_name }}</td>
+                                <td>{{ $assignedGift->gift_name }}</td>
+                                <td>{{ $assignedGift->member_name }}</td>
+                               
+                                <td>{{ $assignedGift->status }}</td>
+                            </tr>
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>

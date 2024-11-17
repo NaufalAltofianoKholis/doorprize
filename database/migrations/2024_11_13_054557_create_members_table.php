@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('telp')->unique();
-            $table->string('member_code')->unique();
             $table->timestamps();
         });
     }

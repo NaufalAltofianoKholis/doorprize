@@ -13,6 +13,7 @@ class Gift extends Model
         'event_id',
         'name',
         'stock',
+        'is_main_doorprize'
     ];
 
     public function event()

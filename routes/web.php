@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GiftController;
+use App\Http\Controllers\GiftResultController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,8 +45,13 @@ Route::get('/blank', function () {
 Route::get('/', function () {
     return view('pages.dashboard');
 });
-Route::get('/mastermember', function () {
-    return view('pages.mastermember');
+
+Route::prefix('mastermember')->group(function () {
+    Route::get('/', [MemberController::class, 'index'])->name('members.index');
+    Route::post('/', [MemberController::class, 'store'])->name('members.store');
+    Route::get('/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::post('/{member}', [MemberController::class, 'update'])->name('members.update');
+    Route::delete('/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
 });
 
 Route::prefix('masterevent')->group(function () {
@@ -54,12 +62,23 @@ Route::prefix('masterevent')->group(function () {
     Route::delete('/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 });
 
-Route::get('/mastergift', function () {
-    return view('pages.mastergift');
+
+Route::prefix('mastergift')->group(function () {
+    Route::get('/', [GiftController::class, 'index'])->name('gifts.index');
+    Route::post('/', [GiftController::class, 'store'])->name('gifts.store');
+    Route::get('/{gift}/edit', [GiftController::class, 'edit'])->name('gifts.edit');
+    Route::post('/{gift}', [GiftController::class, 'update'])->name('gifts.update');
+    Route::delete('/{gift}', [GiftController::class, 'destroy'])->name('gifts.destroy');
 });
-Route::get('/mastergiftresult', function () {
-    return view('pages.mastergiftresult');
+
+Route::prefix('mastergiftresult')->group(function () {
+    Route::get('/', [GiftResultController::class, 'index'])->name('giftresults.index');
+    Route::post('/', [GiftResultController::class, 'store'])->name('giftresults.store');
+    Route::get('/{gift}results/edit', [GiftResultController::class, 'edit'])->name('giftresults.edit');
+    Route::post('/{giftresults}', [GiftResultController::class, 'update'])->name('giftresults.update');
+    Route::delete('/{giftresults}', [GiftResultController::class, 'destroy'])->name('giftresults.destroy');
 });
+
 Route::get('/import', function () {
     return view('pages.import');
 });

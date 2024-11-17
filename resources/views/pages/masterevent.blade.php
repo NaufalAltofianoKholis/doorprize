@@ -69,6 +69,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Event List</h6>
                 </div>
                 <div class="card-body">
+                @if(isset($events) && $events->isNotEmpty())
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -99,6 +100,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                      @else
+                    <p>Event is Empty.</p>
+                @endif
                 </div>
             </div>
         </div>

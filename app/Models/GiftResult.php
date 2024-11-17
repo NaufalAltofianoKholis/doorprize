@@ -13,6 +13,7 @@ class GiftResult extends Model
         'event_id',
         'gift_id',
         'member_id',
+        'status',
     ];
 
     public function event()
@@ -27,6 +28,6 @@ class GiftResult extends Model
 
     public function member()
     {
-        return $this->hasMany(Member::class);
+        return $this->belongsTo(Member::class);
     }
 }
