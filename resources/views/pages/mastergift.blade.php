@@ -93,8 +93,9 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>NO</th>
                                 <th>Gift Name</th>
+                                <th>Event</th>
                                 <th>Stock</th>
                                 <th>Main Doorprize</th>
                                 <th>Actions</th>
@@ -105,6 +106,7 @@
                             <tr>
                                 <td>{{ $gift->id }}</td>
                                 <td>{{ $gift->name }}</td>
+                                <td>{{ $gift->event->name }}</td>
                                 <td>{{ $gift->stock }}</td>
                                 <td>{{ $gift->is_main_doorprize ? 'Yes' : 'No' }}</td>
                                 <td>

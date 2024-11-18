@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\GiftResult;
 use App\Http\Requests\StoreGiftResultRequest;
 use App\Http\Requests\UpdateGiftResultRequest;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GiftResultController extends Controller
 {
@@ -30,9 +32,26 @@ class GiftResultController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGiftResultRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request->all());
+
+        $validateData=Validator::make($request->all(),
+        [
+                'event_id' => 'required|integer',
+                'member_id' => 'required|integer',
+                'gift_id' => 'required|integer',
+                'status'=>'required|integer',
+        ]);
+
+        if ($validateData->fails()) {
+            return response()->json($validateData->errors());
+        }
+        else{
+           GiftResult::create($request->all());
+            return redirect()->route('giftresults.index')->with('success','data has been created');
+        }
+
     }
 
     /**

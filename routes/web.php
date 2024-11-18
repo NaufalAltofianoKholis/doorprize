@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\GiftResultController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\LotteryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,6 +90,13 @@ Route::get('/MainLottery', function () {
 Route::get('/RegularLottery', function () {
     return view('pages.RegularLottery');
 });
+
+
+Route::get('/getEvent',[LotteryController::class,'showEvent']);
+Route::get('/getRegularGift/{eventid}',[LotteryController::class,'showRegularGift']);
+// Route::get('/getMainGift/{eventid}',[LotteryController::class,'showMainGift']);
+Route::get('/getGiftStock/{id}',[LotteryController::class,'showItemStock']);
+// Route::post('/acak-hadiah', [LotteryController::class, 'acakHadiah']);
 
 // routing management
 
