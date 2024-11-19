@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('status');
+            $table->string('member_code');
             $table->timestamps();
         });
     }

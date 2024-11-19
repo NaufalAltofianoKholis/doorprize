@@ -29,8 +29,6 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            // 'email' => 'required|email',
-            // 'phone' => 'required|string|max:15',
         ]);
 
         if ($validator->fails()) {
@@ -39,7 +37,20 @@ class MemberController extends Controller
             ], 422);
         }
 
-        Member::create($request->all());
+        $statusAktif=1;
+
+        $latestMember= Member::orderBy('id','desc')->first();
+
+        $code = $latestMember ? $latestMember->id+1 : 1;
+
+        $memberCode= str_pad((string)$code,4,"0",STR_PAD_LEFT);
+        
+        Member::create([
+            'name'=>$request['name'],
+            'status'=>$statusAktif,
+            'member_code'=>$memberCode
+        ]);
+
 
         return redirect()->route('members.index')->with('success', 'Member added successfully!');
     }

@@ -17,16 +17,6 @@ class LotteryController extends Controller
     //buat nyari gift yang berkaitan dengan event tertentu, dan bukan sebuah doorprize
     public function showRegularGift($id){
         $gift= Gift::where('event_id',$id)
-        ->where('is_main_doorprize',0)
-        ->get();
-
-        return response()->json($gift);
-    }
-
-    //buat nyari gift yang berkaitan dgn event,dan sebuah doorprize
-    public function showMainGift($id){
-        $gift=Gift::where('event_id',$id)
-        ->where('is_main_doorprize',1)
         ->get();
 
         return response()->json($gift);

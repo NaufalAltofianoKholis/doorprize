@@ -12,5 +12,6 @@ class Member extends Model
     protected $fillable = [
         'name',
         'status',
+        'member_code'
     ];
 }
