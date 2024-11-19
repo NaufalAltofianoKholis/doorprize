@@ -12,7 +12,7 @@ class GiftResult extends Model
     protected $fillable = [
         'event_id',
         'gift_id',
-        'member_id',
+        'member_code',
         'status',
     ];
 

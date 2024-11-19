@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -29,22 +30,35 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'member_code' => 'required|string|max:4|min:4|unique:members,member_code',
+        ],
+        [
+            'name.required' => 'Nama haris diisi.',
+            'name.string' => 'Name must be a string.',
+            'name.max' => 'Name cannot exceed 255 characters.',
+            'member_code.required' => 'Member code harus diisi.',
+            'member_code.string' => 'Member code must be a string.',
+            'member_code.max' => 'Member code maximal berisi 4 digit.',
+            'member_code.min' => 'Member code minimal berisi 4 digit.',
+            'member_code.unique' => 'Member code sudah ada.',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $statusAktif=1;
 
-        $latestMember= Member::orderBy('id','desc')->first();
+        // $latestMember= Member::orderBy('id','desc')->first();
 
-        $code = $latestMember ? $latestMember->id+1 : 1;
+        // $code = $latestMember ? $latestMember->id+1 : 1;
 
-        $memberCode= str_pad((string)$code,4,"0",STR_PAD_LEFT);
-        
+        // $memberCode= str_pad((string)$request['member_code'],4,"0",STR_PAD_LEFT);
+
+        $memberCode=$request['member_code'];
+
         Member::create([
             'name'=>$request['name'],
             'status'=>$statusAktif,
@@ -71,6 +85,7 @@ class MemberController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'member_code' => 'required|string|max:255',
             // 'email' => 'required|email',
             // 'phone' => 'required|string|max:15',
         ]);
@@ -96,4 +111,6 @@ class MemberController extends Controller
         $member->delete();
         return redirect()->route('members.index')->with('success', 'Member deleted successfully!');
     }
+
+
 }

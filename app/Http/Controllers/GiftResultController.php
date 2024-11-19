@@ -34,25 +34,29 @@ class GiftResultController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        try {
+            // $validator = Validator::make($request->all(), [
+            //     'event_id' => 'required|integer',
+            //     'gift_id' => 'required|integer',
+            //     'member_code' => 'required',
+            // ]);
 
-        $validateData=Validator::make($request->all(),
-        [
-                'event_id' => 'required|integer',
-                'member_id' => 'required|integer',
-                'gift_id' => 'required|integer',
-                'status'=>'required|integer',
-        ]);
+            // if(validator()->fails()){
+            //     return response()->json(['errors' => $validator->errors()], 422);
+            // }
 
-        if ($validateData->fails()) {
-            return response()->json($validateData->errors());
+            GiftResult::create([
+                'event_id' => $request['event_id'], // Use a valid ID from your database
+                'gift_id' =>   $request['gift_id'],  // Use a valid ID from your database
+                'member_code' => $request['member_code'], // Use a valid ID from your database
+                'status' => 0,
+            ]);
+            return response()->json(['message' => 'Data has been created successfully!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to store lottery result'], 500);
         }
-        else{
-           GiftResult::create($request->all());
-            return redirect()->route('giftresults.index')->with('success','data has been created');
-        }
-
     }
+
 
     /**
      * Display the specified resource.

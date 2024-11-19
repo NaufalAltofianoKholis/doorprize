@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ asset('assets/img/logo_doorprize.png') }}" type="image/x-icon">
 
-    <title>Lottery</title>
+    <title>Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
