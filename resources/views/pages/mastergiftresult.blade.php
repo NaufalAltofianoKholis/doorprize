@@ -22,7 +22,7 @@
                             <tr>
                                 <th>Event Name</th>
                                 <th>Gift Name</th>
-                                <th>Member Name</th> 
+                                <th>Member Name</th>
                                 <th>Status Delivery</th>
                             </tr>
                         </thead>
@@ -31,8 +31,8 @@
                             <tr>
                                 <td>{{ $giftResult->event->name }}</td>
                                 <td>{{ $giftResult->gift->name }}</td>
-                                <td>{{ $giftResult->member->name }}</td>
-                                <td>{{ $giftResult->status }}</td>    
+                                <td>{{ $giftResult->member_code }}</td>
+                                <td>{{ $giftResult->status }}</td>
                             </tr>
                             @endforeach
                             {{-- @foreach ($assignedGifts as $assignedGift)
@@ -40,7 +40,7 @@
                                 <td>{{ $assignedGift->event_name }}</td>
                                 <td>{{ $assignedGift->gift_name }}</td>
                                 <td>{{ $assignedGift->member_name }}</td>
-                               
+
                                 <td>{{ $assignedGift->status }}</td>
                             </tr>
                             @endforeach --}}

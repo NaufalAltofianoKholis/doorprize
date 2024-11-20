@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GiftResult;
 use App\Http\Requests\StoreGiftResultRequest;
 use App\Http\Requests\UpdateGiftResultRequest;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,6 +52,9 @@ class GiftResultController extends Controller
                 'member_code' => $request->input('member_code'),
                 'status' => 0,
             ]);
+
+            Member::where('member_code', $request->input('member_code'))->update(['status' => 0]);
+
             return response()->json(['message' => 'Data has been created successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to store lottery result', "err" => $e], 500);

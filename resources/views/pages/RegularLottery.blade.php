@@ -15,6 +15,7 @@
                     class="font-weight-bold">
                     UNDIAN HADIAH
                 </h1>
+                <audio id="backsound" src="{{ asset('assets/audio/backsound_spin.mp3') }}"></audio>
             </div>
 
             <!-- Form -->
@@ -147,6 +148,7 @@
 
             // Lottery logic
             let acakInterval;
+            const backsound = document.getElementById('backsound');
 
             $("#acakBtn").click(function() {
                 const selectedEvent = $("#event-select").val();
@@ -156,6 +158,9 @@
                     alert("Silakan pilih event dan hadiah terlebih dahulu!");
                     return;
                 }
+
+                // Mainkan backsound
+                backsound.play();
 
                 // Fetch member codes and start the lottery
                 $.ajax({
@@ -174,7 +179,13 @@
 
             $("#berhentiBtn").click(function() {
                 clearInterval(acakInterval);
+                // Hentikan backsound
+                backsound.pause();
+                backsound.currentTime = 0; // Reset audio ke awal
             });
+
+
+
 
             function startLottery(memberCodes) {
                 let index = 0;
@@ -193,6 +204,10 @@
 
                     clearInterval(acakInterval);
 
+                    // Hentikan backsound setelah pemenang dipilih
+                    backsound.pause();
+                    backsound.currentTime = 0;
+
                     $.ajax({
                         type: "POST",
                         data: {
@@ -210,8 +225,7 @@
                             console.error("Error saving data:", error);
                         }
                     });
-
-                }, 5000);
+                }, 10000);
             }
 
             function shuffleArray(array) {
