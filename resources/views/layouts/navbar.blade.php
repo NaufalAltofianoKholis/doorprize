@@ -1,12 +1,25 @@
  <!-- Topbar -->
  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa fa-bars"></i>
-    </button>
+<style>
+    #marquee{
+        color:rgb(0, 255, 8);
+        font-weight: 900
+    }
+</style>
 
-    <!-- Topbar Search
+     {{-- <marquee scrollamount="10" direction="left">
+         <h1 id="marquee">SEMOGA BERUNTUNG🎁</h1>
+     </marquee> --}}
+
+
+
+     <!-- Sidebar Toggle (Topbar) -->
+     {{-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button> --}}
+
+     <!-- Topbar Search
     <form
         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
@@ -20,8 +33,8 @@
         </div>
     </form> -->
 
-    <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+     <!-- Topbar Navbar -->
+     {{-- <ul class="navbar-nav ml-auto">
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
@@ -54,7 +67,7 @@
             </div>
         </li>
 
-    </ul>
+    </ul> --}}
 
-</nav>
-<!-- End of Topbar -->
+ </nav>
+ <!-- End of Topbar -->

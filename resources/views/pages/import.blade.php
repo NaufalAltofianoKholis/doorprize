@@ -4,11 +4,11 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Import Excel File</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div>
+    </div> --}}
 
     <!-- Import Form -->
     <div class="row">
@@ -39,12 +39,12 @@
                     <h6 class="m-0 font-weight-bold text-primary">Import Instructions</h6>
                 </div>
                 <div class="card-body">
-                    <p>Please upload an Excel file with the correct format. Accepted formats: .xlsx, .xls</p>
-                    <p>Ensure your file contains the following columns:</p>
+                    <p>Upload file excel dengan format yang benar. contoh format: .xlsx, .xls</p>
+                    <p>Pastikan Header pada file sesuai:</p>
                     <ul>
-                        <li><strong>Column A:</strong> Name</li>
-                        <li><strong>Column B:</strong> Phone</li>
-                        <li><strong>Column C:</strong> Event ID (if necessary)</li>
+                        <li><strong>Kolom 1 :</strong> name</li>
+                        <li><strong>Kolom 2 :</strong> member_code</li>
+                        {{-- <li><strong>Column C:</strong> Event ID (if necessary)</li> --}}
                     </ul>
                     <!-- Optionally, you can include a list or a log of past uploads here -->
                 </div>

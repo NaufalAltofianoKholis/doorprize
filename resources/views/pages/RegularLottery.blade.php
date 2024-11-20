@@ -1,6 +1,47 @@
 @extends('nosidebar')
-
 @section('content')
+    <style>
+        .glass-box {
+            width: 400px;
+            color: #002029;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(7px);
+            border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
+        }
+
+        h1 {
+            font-family: 'Coiny', cursive;
+            font-size: 100px;
+
+            /* background: -webkit-linear-gradient(-86deg, #EEF85B 5%, #7AEC8D 53%, #09E5C3 91%); */
+            background: -webkit-linear-gradient(-86deg, #EEF85B 5%, #F68229 53%, #EEF85B 91%);
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 4px transparent;
+            color: #000000;
+            letter-spacing: 80px;
+        }
+        select {
+            border: 1px solid
+        }
+
+        .btn {
+            background: #F68229;
+            background: -webkit-linear-gradient(to right, #FFCF2D, #F68229);
+            background: linear-gradient(to right, #FFCF2D, #F68229);
+            color: white;
+            border-radius: 30px;
+            border: 3px solid white;
+            letter-spacing: 2px;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+    </style>
+
     <div class="container-fluid"
         style="background-image: url('{{ asset('assets/img/bg-lottery3.png') }}');
                background-size: cover;
@@ -10,12 +51,13 @@
 
         <div class="container py-5">
             <!-- Header -->
-            <div class="page-header text-center mb-5">
-                <h1 style="color: rgb(0, 0, 0); font-size: 50px; font-family: 'Poppins', sans-serif;"
+            <div class="page-header text-center" style="margin-bottom: 260px;">
+                {{-- <h1 style="color: rgb(0, 0, 0); font-size: 50px; font-family: 'Poppins', sans-serif;"
                     class="font-weight-bold">
                     UNDIAN HADIAH
-                </h1>
+                </h1> --}}
                 <audio id="backsound" src="{{ asset('assets/audio/backsound_spin.mp3') }}"></audio>
+
             </div>
 
             <!-- Form -->
@@ -23,34 +65,34 @@
                 @csrf
 
                 <!-- Dropdowns Section -->
-                <div class="d-flex flex-wrap justify-content-center gap-4 mb-5">
+                <div class="d-flex flex-wrap justify-content-center col-md-6 mx-auto pt-3 mb-4 glass-box">
                     <!-- Event Selection -->
-                    <div class="form-group">
-                        <label for="event-select" class="sr-only">Pilih Event</label>
-                        <select id="event-select" name="event" class="form-control">
-                            <option value="" selected disabled>Pilih Event</option>
+                    <div class="form-group mr-4">
+                        {{-- <label for="event-select" class="sr-only">Pilih Event</label> --}}
+                        <select id="event-select" name="event" class="form-control" style="cursor: pointer;">
+                            <option value="" selected disabled>Event</option>
                         </select>
                     </div>
 
                     <!-- Hadiah Selection -->
                     <div class="form-group">
-                        <label for="hadiah-select" class="sr-only">Pilih Hadiah</label>
-                        <select id="hadiah-select" name="hadiah" class="form-control">
+                        {{-- <label for="hadiah-select" class="sr-only">Pilih Hadiah</label> --}}
+                        <select id="hadiah-select" name="hadiah" class="form-control" style="cursor: pointer;">
                             <option value="" selected disabled>Pilih Hadiah</option>
                         </select>
                     </div>
 
                     <!-- Stock Display -->
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="stock" class="sr-only">Stok</label>
                         <input id="stock" class="form-control bg-white" placeholder="Stok" readonly>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Display Box -->
-                <div class="d-flex justify-content-center mb-5">
-                    <div class="glass-box text-center p-4">
-                        <h1 id="hadiah" class="font-weight-bold display-4" style="font-family: 'Coiny', cursive;">0000
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="glass-box text-center pl-5 pt-3 " style="width: 600px">
+                        <h1 id="hadiah" class="font-weight-bold">0000
                         </h1>
                     </div>
                 </div>
@@ -59,31 +101,19 @@
                 <input type="hidden" id="hadiah-value" name="hadiah_value" value="0000">
 
                 <!-- Buttons -->
-                <div class="d-flex justify-content-center gap-4">
-                    <button id="acakBtn" type="button" class="btn btn-success font-weight-bold px-4">
-                        Acak
+                <div class="d-flex justify-content-center gap-4" >
+                    <button id="acakBtn" type="button" class="btn btn-lg font-weight-bold px-5 btn">
+                        ACAK
                     </button>
-                    <button id="berhentiBtn" type="button" class="btn btn-danger font-weight-bold px-4">
+                    {{-- <button id="berhentiBtn" type="button" class="btn btn-danger font-weight-bold px-4">
                         Berhenti
-                    </button>
+                    </button> --}}
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Custom CSS -->
-    <style>
-        .glass-box {
-            width: 400px;
-            color: #002029;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(7px);
-            -webkit-backdrop-filter: blur(7px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-    </style>
+
 
     <!-- JavaScript -->
     <script>
@@ -133,6 +163,7 @@
 
             // Fetch stock when a gift is selected
             $("#hadiah-select").change(function() {
+                $("#hadiah").text("0000");
                 let hadiahId = $("#hadiah-select").val();
                 $("#stock").empty().append(
                     `<option value="" disabled selected>Loading...</option>`);
@@ -167,6 +198,8 @@
                     method: "GET",
                     url: `http://localhost:8000/getMemberCodes/`,
                     success: function(response) {
+                        console.log(response);
+
                         const memberCodes = shuffleArray(response.map(member => member
                             .member_code));
                         startLottery(memberCodes);

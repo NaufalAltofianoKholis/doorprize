@@ -29,8 +29,9 @@ class LotteryController extends Controller
     }
 
     public function getMemberCodes(){
-        $member= Member::where('status',1)
-        ->get();
+        $member= Member::where('status',1)->get();
+
+        // $member= Member::all();
 
         return response()->json($member);
     }

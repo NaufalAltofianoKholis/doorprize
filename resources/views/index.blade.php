@@ -24,18 +24,37 @@
 
 </head>
 
+<style>
+   #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+    #content-wrapper {
+        margin-left: 220px
+    }
+
+</style>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include('layouts.sidebar')
+        <div id="sidebar">
+            @include('layouts.sidebar')
+        </div>
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="contentz">
+            <div id="content">
 
                @include('layouts.navbar')
 

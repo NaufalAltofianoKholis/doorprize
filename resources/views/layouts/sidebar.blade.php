@@ -4,7 +4,7 @@
         background-color: #006400;}
 </style>
 
-<ul class="navbar-nav warna sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav warna sidebar sidebar-dark accordion " id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
