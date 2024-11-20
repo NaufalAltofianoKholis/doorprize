@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Gift;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class LotteryController extends Controller
@@ -25,5 +26,12 @@ class LotteryController extends Controller
     public function showItemStock($id){
         $giftStock= Gift::where('id',$id)->get();
         return response()->json($giftStock);
+    }
+
+    public function getMemberCodes(){
+        $member= Member::where('status',1)
+        ->get();
+
+        return response()->json($member);
     }
 }

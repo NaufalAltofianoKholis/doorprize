@@ -12,6 +12,14 @@
     </div>
     @endif
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+    </div>
+@endif
+
     <!-- Button to toggle form visibility -->
     <button id="toggleForm" class="btn btn-primary mb-3">Add Member</button>
 
@@ -36,11 +44,11 @@
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" required  value="{{ old('name', $event->name ?? '') }}" >
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
                             <div class="form-group">
+                                <label for="member_code">Nomor Lottery</label>
+                                <input type="text" class="form-control" id="member_code " name="member_code" required>
+                            </div>
+                            {{-- <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" id="phone" name="phone" required>
                             </div> --}}
@@ -65,18 +73,20 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Name</th>
+                                <th>Nomor Lottery</th>
                                 {{-- <th>Email</th>
                                 <th>Phone</th> --}}
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($members as $member)
+                            @foreach ($members as $index => $member)
                             <tr>
-                                <td>{{ $member->id }}</td>
+                                <td>{{ $index+1 }}</td>
                                 <td>{{ $member->name }}</td>
+                                <td>{{ $member->member_code }}</td>
                                 {{-- <td>{{ $member->email }}</td>
                                 <td>{{ $member->phone }}</td> --}}
                                 <td>

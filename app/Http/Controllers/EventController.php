@@ -33,14 +33,19 @@ class EventController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'date_start' => 'required|date',
-            'date_end' => 'required|date|after_or_equal:date_start',
+            'date_start' => ['required', 'date', 'after_or_equal:' . now()->format('d-m-Y')],
+            'date_end' => ['required', 'date', 'after_or_equal:date_start', 'before_or_equal:' . now()->addDays(30)->format('d-m-Y')],
+        ],
+        [
+            'date_start.after_or_equal' => 'Tanggal dimulai minimal hari ini atau setelahnya.',
+            'date_end.after_or_equal' => 'Tanggal selesai minimal sama atau setelah tanggal dimulai.',
+            'date_end.before_or_equal' => 'Tanggal selesai maksimal 30 hari.',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
        Event::create($request->all());
@@ -65,11 +70,11 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-    
+
         // Return event data as JSON
         return response()->json($event);
     }
-    
+
 
     /**
      * Update the specified resource in storage.
