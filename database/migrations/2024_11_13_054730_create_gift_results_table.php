@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('event_id')->constrained('events')->delete('cascade');
             $table->foreignId('gift_id')->constrained('gifts')->delete('cascade');
-            $table->foreignId('member_id')->constrained('members')->delete('cascade');
+            $table->string('member_code')->constrained('members')->delete('cascade');
+            $table->integer("status");
             $table->timestamps();
         });
     }
@@ -27,4 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('gift_results');
     }
+
 };

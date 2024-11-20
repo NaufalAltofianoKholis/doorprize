@@ -20,11 +20,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    {{-- <li class="nav-item active">
         <a class="nav-link" href="/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -87,8 +87,8 @@
         <div id="collapseLottery" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Lottery Screens:</h6>
-                <a class="collapse-item" href="MainLottery">Main Lottery</a>
-                <a class="collapse-item" href="RegularLottery">Regular Lottery</a>
+                {{-- <a class="collapse-item" href="MainLottery">Main Lottery</a> --}}
+                <a class="collapse-item" target="_blank" href="RegularLottery">Lottery</a>
             </div>
         </div>
     </li>

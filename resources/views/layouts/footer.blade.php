@@ -2,7 +2,7 @@
   <footer class="sticky-footer mt-5 bg-white">
     <div class="container">
         <div class="copyright text-center">
-            <span>Copyright &copy; Your Website 2024</span>
+            <span>Made with love by us</span>
         </div>
     </div>
 </footer>

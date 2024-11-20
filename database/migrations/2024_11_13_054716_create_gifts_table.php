@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained('events')->delete('cascade');
             $table->string('name');
             $table->integer('stock');
+            $table->boolean("is_main_doorprize");
             $table->timestamps();
         });
     }

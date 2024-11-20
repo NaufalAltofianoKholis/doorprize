@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\GiftResult;
 use App\Http\Requests\StoreGiftResultRequest;
 use App\Http\Requests\UpdateGiftResultRequest;
+use App\Models\Member;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GiftResultController extends Controller
 {
@@ -13,7 +16,10 @@ class GiftResultController extends Controller
      */
     public function index()
     {
-        //
+        $giftResults=GiftResult::all();
+
+
+        return view('pages.mastergiftresult',compact('giftResults'));
     }
 
     /**
@@ -27,10 +33,34 @@ class GiftResultController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGiftResultRequest $request)
+    public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'event_id' => 'required|integer',
+                'gift_id' => 'required|integer',
+                'member_code' => 'required',
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            GiftResult::create([
+                'event_id' => $request->input('event_id'),
+                'gift_id' => $request->input('gift_id'),
+                'member_code' => $request->input('member_code'),
+                'status' => 0,
+            ]);
+
+            Member::where('member_code', $request->input('member_code'))->update(['status' => 0]);
+
+            return response()->json(['message' => 'Data has been created successfully!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to store lottery result', "err" => $e], 500);
+        }
     }
+
 
     /**
      * Display the specified resource.

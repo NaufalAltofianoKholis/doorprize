@@ -18,7 +18,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Upload Excel File</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="file">Select Excel File</label>

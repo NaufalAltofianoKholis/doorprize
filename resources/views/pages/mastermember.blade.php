@@ -1,91 +1,160 @@
 @extends('index')
 
 @section('content')
-<div class="container-fluid">    <!-- Page Heading -->
+<div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Contact</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <h1 class="h3 mb-0 text-gray-800">Member Management</h1>
     </div>
 
- <!-- Input Form -->
-<div class="row">
-    <div class="col-lg-12 mb-4">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Input Data Peserta</h6>
-            </div>
-            <div class="card-body">
-                <form method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Nama</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="telp">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="telp" name="telp" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="member_code">Nomor Perserta</label>
-                                <input type="text" class="form-control" id="member_code" name="member_code" required>
-                            </div>
-                        </div>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+    </div>
+@endif
+
+    <!-- Button to toggle form visibility -->
+    <button id="toggleForm" class="btn btn-primary mb-3">Add Member</button>
+
+    <!-- Input Form (Initially minimized) -->
+    <div id="formContainer" style="display: none;">
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Add or Edit Member
+                        </h6>
                     </div>
-                    <button type="submit" class="btn btn-success row col-md-2 col-md-offset-5 mt-3 mb-3 mx-auto">Submit</button>
-                </form>
+                    <div class="card-body">
+                        <form id="memberForm" method="POST" action="{{ route('members.store') }}">
+                            @csrf
+                                @if (isset($member))
+                                @method('PUT')
+                                @endif
+                            <input type="hidden" id="memberId" name="id">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required  value="{{ old('name', $event->name ?? '') }}" >
+                            </div>
+                            <div class="form-group">
+                                <label for="member_code">Nomor Lottery</label>
+                                <input type="text" class="form-control" id="member_code " name="member_code" required>
+                            </div>
+                            {{-- <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone" required>
+                            </div> --}}
+
+                            <button type="submit" class="btn btn-success">{{ isset($member) ? 'Update Member' : 'Submit Member' }}</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-    <!-- Table CRUD -->
+    <!-- Member List Table -->
     <div class="row">
         <div class="col-lg-12 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Contacts List</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Member List</h6>
                 </div>
                 <div class="card-body">
+                    @if ($members->isNotEmpty())
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Name</th>
-                                <th>Phone</th>
-                                <th>Nomor Perserta</th>
+                                <th>Nomor Lottery</th>
+                                {{-- <th>Email</th>
+                                <th>Phone</th> --}}
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 1; $i <= 5; $i++)
+                            @foreach ($members as $index => $member)
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>Nama Contoh {{ $i }}</td>
-                                <td>08123456789{{ $i }}</td>
-                                <td>123456789{{ $i }}</td>
+                                <td>{{ $index+1 }}</td>
+                                <td>{{ $member->name }}</td>
+                                <td>{{ $member->member_code }}</td>
+                                {{-- <td>{{ $member->email }}</td>
+                                <td>{{ $member->phone }}</td> --}}
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="#" method="POST" class="d-inline">
+                                    <button class="btn btn-warning btn-sm" onclick="editMember({{ $member->id }})">Edit</button>
+                                    <form method="POST" action="{{ route('members.destroy', $member->id) }}" class="d-inline" id="deleteForm_{{ $member->id }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $member->id }})">Delete</button>
                                     </form>
                                 </td>
                             </tr>
-                        @endfor
-
+                            @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <p>Member is Empty.</p>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
+<!-- Toggle Form Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const formContainer = document.getElementById('formContainer');
+        const toggleButton = document.getElementById('toggleForm');
+
+        // Toggle form visibility
+        toggleButton.addEventListener('click', function() {
+            if (formContainer.style.display === 'none') {
+                formContainer.style.display = 'block';
+                toggleButton.textContent = 'Minimize';
+            } else {
+                formContainer.style.display = 'none';
+                toggleButton.textContent = 'Add Member';
+            }
+        });
+
+        // Edit member function to prefill form
+        window.editMember = function(id) {
+            fetch(`/mastermember/${id}/edit`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('memberId').value = data.id;
+                    document.getElementById('name').value = data.name;
+                    // document.getElementById('email').value = data.email;
+                    // document.getElementById('phone').value = data.phone;
+
+                    // Change form action to the update route
+                    document.querySelector('form').action = `/mastermember/${id}`;
+
+                    // Show form if hidden
+                    if (formContainer.style.display === 'none') {
+                        formContainer.style.display = 'block';
+                        toggleButton.textContent = 'Minimize';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        };
+
+        window.confirmDelete = function(memberId) {
+            const confirmation = confirm("Are you sure you want to delete this member?");
+            if (confirmation) {
+                document.getElementById('deleteForm_' + memberId).submit();
+            }
+        };
+    });
+</script>
 @endsection
