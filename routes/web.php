@@ -100,6 +100,10 @@ Route::get('/getGiftStock/{id}',[LotteryController::class,'showItemStock']);
 Route::get('/getMemberCodes',[LotteryController::class,'getMemberCodes']);
 Route::post('/import', [MemberImportController::class, 'import'])->name('import');
 
+Route::get('/popup',function () {
+    return view('layouts.popup');
+});
+
 
 
 

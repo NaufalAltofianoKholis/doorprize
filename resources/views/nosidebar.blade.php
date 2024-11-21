@@ -38,7 +38,7 @@
                 <!-- Main Content -->
                 <div id="content" style="">
                     <!-- Begin Page Content -->
-                    @yield('content')
+                    @yield('lottery')
                     <!-- /.container-fluid -->
                     {{-- @include('layouts.footer') --}}
                 </div>
@@ -89,6 +89,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+
+
 </body>
 
 </html>

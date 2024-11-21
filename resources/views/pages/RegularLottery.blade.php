@@ -1,5 +1,12 @@
 @extends('nosidebar')
-@section('content')
+@section('lottery')
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('assets/css/popup.css') }}">
+    </head>
+
+
+
     <style>
         .glass-box {
             width: 400px;
@@ -23,6 +30,7 @@
             color: #000000;
             letter-spacing: 80px;
         }
+
         select {
             border: 1px solid
         }
@@ -41,6 +49,18 @@
             color: white;
         }
     </style>
+
+    <dialog id="dialog">
+        <canvas id="canvas"></canvas>
+        <div class="message-container">
+            <h2 class="message" id="title">SELAMAT🎉</h2>
+            <div class="message-wrap">
+                <h2 class="message" id="winner-popup"> NOMOR UNDIAN : 0000</h2>
+                <h2 class="message" id="prize-popup">MENDAPATKAN : Mobil</h2>
+            </div>
+        </div>
+        <button id="close-popup" onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
 
     <div class="container-fluid"
         style="background-image: url('{{ asset('assets/img/bg-lottery3.png') }}');
@@ -101,7 +121,7 @@
                 <input type="hidden" id="hadiah-value" name="hadiah_value" value="0000">
 
                 <!-- Buttons -->
-                <div class="d-flex justify-content-center gap-4" >
+                <div class="d-flex justify-content-center gap-4">
                     <button id="acakBtn" type="button" class="btn btn-lg font-weight-bold px-5 btn">
                         ACAK
                     </button>
@@ -231,6 +251,7 @@
                 setTimeout(() => {
                     const selectedEvent = $("#event-select").val();
                     const selectedHadiah = $("#hadiah-select").val();
+                    const selectedHadiahName = $("#hadiah-select option:selected").text();
                     const winner = memberCodes[0];
                     $("#hadiah").text(winner);
                     $("#hadiah-value").val(winner);
@@ -250,9 +271,11 @@
                         },
                         url: "http://localhost:8000/mastergiftresult",
                         success: function(response) {
-
                             console.log("Data berhasil disimpan:", response);
                             console.log(selectedEvent, selectedHadiah, winner);
+                            $("#winner-popup").text("NOMOR UNDIAN: "+winner);
+                            $("#prize-popup").text("MENDAPATKAN: "+ selectedHadiahName );
+                            showModalWithConfetti();
                         },
                         error: function(error) {
                             console.error("Error saving data:", error);
@@ -270,4 +293,6 @@
             }
         });
     </script>
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/js/popup.js') }}"></script>
 @endsection

@@ -1,0 +1,132 @@
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+        :root {
+            --vs-primary: 29 92 255;
+        }
+
+        #title{
+            display: flex;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 3rem;
+            color: black;
+            margin-bottom: 1.5rem;
+        }
+
+        .message-container {
+            display: flex;
+            /* align-items: center; */
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .message-wrap{
+            margin-top: 30px;
+            margin-left: 10px;
+        }
+
+        dialog {
+            padding: 1rem 3rem;
+            background: white;
+            width: 600px;
+            height: 350px;
+            /* max-width: 700px; */
+            padding-top: 2rem;
+            border-radius: 20px;
+            border: 0;
+            box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+            animation: fadeIn 1s ease both;
+            position: relative;
+        }
+
+        dialog::backdrop {
+            animation: fadeIn 1s ease both;
+            background: rgb(255 255 255 / 40%);
+            z-index: 2;
+            backdrop-filter: blur(20px);
+        }
+
+        .x {
+            filter: grayscale(1);
+            border: none;
+            background: none;
+            position: absolute;
+            top: 15px;
+            right: 10px;
+            transition: ease filter, transform 0.3s;
+            cursor: pointer;
+            transform-origin: center;
+        }
+
+        .x:hover {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        .message {
+            font-weight: 600;
+            font-size: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        /* body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Poppins, sans-serif;
+            background-size: cover;
+        } */
+
+        #popup{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #close-popup.primary {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #fff !important;
+            background: rgb(var(--vs-primary) / 100%);
+            padding: 13px 25px;
+            border-radius: 17px;
+            transition: background-color 0.1s ease;
+            box-sizing: border-box;
+            transition: all 0.25s ease;
+            border: 0;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -10px rgb(var(--vs-primary) / 50%);
+        }
+
+        #close-popup.primary:hover {
+            box-shadow: 0 20px 20px -10px rgb(var(--vs-primary) / 50%);
+            transform: translateY(-5px);
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
