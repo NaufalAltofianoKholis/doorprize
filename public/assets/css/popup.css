@@ -1,13 +1,16 @@
 
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
         :root {
             --vs-primary: 29 92 255;
         }
 
         #title{
-            display: flex;
-            justify-content: center;
+            /* display: flex;
+            justify-content: left; */
+            margin-left: 330px;
+            font-family: "Roboto Mono", monospace;
             font-weight: 900;
             font-size: 3rem;
             color: black;
@@ -23,19 +26,72 @@
 
         .message-wrap{
             margin-top: 30px;
-            margin-left: 10px;
+            /* margin-left: 10px; */
+            margin-left: 150px;
         }
+
+        .message-wrap .no-undian {
+            margin-bottom: 30px;
+        }
+
+        .message-wrap .no-undian .label-undian{
+            font-family: "Roboto Mono", monospace;
+            font-weight: 400;
+            color: rgb(131, 131, 131);
+        }
+
+        .message-wrap .no-undian .kotak-undian{
+            display: flex;
+            justify-content: center;
+            
+            /* text-align: center; */
+            width: 600px;
+            height: 100px;
+            border-radius: 10px;
+            background: rgb(254,171,56);
+            background: linear-gradient(90deg, rgba(254,171,56,1) 0%, rgba(255,103,39,1) 100%);
+        }
+        .message-wrap .no-undian .kotak-undian h2{
+            letter-spacing: 70px;
+            text-align: center;
+            margin-left: 50px;
+            font-size: 80px;
+        }
+
+        .message-wrap .hadiah .kotak-hadiah{
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+            width: 600px;
+            height: 100px;
+            border-radius: 10px;
+            background: rgb(14,212,213);
+            background: linear-gradient(90deg, rgba(14,212,213,1) 0%, rgba(6,143,145,1) 100%);
+        }
+
+        .message-wrap .hadiah .kotak-hadiah h2{
+            font-size: 50px;
+        }
+
+        .message-wrap .hadiah .label-hadiah{
+            font-family: "Roboto Mono", monospace;
+            font-weight: 400;
+            color: rgb(131, 131, 131);
+        }
+
 
         dialog {
             padding: 1rem 3rem;
-            background: white;
-            width: 600px;
-            height: 350px;
+            background: none;
+            background-image: url(".././img/ticket_in.png");
+            background-size: 1200px 500px;
+            width: 1200px;
+            height: 500px;
             /* max-width: 700px; */
             padding-top: 2rem;
             border-radius: 20px;
-            border: 0;
-            box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+            border: none;
+            /* box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%); */
             animation: fadeIn 1s ease both;
             position: relative;
         }
@@ -62,12 +118,15 @@
         .x:hover {
             filter: grayscale(0);
             transform: scale(1.1);
+            text-decoration: none;
         }
 
         .message {
-            font-weight: 600;
-            font-size: 2rem;
-            padding-bottom: 1rem;
+            font-family: "Roboto Mono", monospace;
+            font-weight: 500;
+            font-size: 60px;
+            color: white;
+            /* padding-bottom: 1rem; */
         }
 
         /* body {

@@ -5,8 +5,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/popup.css') }}">
     </head>
 
-
-
     <style>
         .glass-box {
             width: 400px;
@@ -55,11 +53,21 @@
         <div class="message-container">
             <h2 class="message" id="title">SELAMAT🎉</h2>
             <div class="message-wrap">
-                <h2 class="message" id="winner-popup"> NOMOR UNDIAN : 0000</h2>
-                <h2 class="message" id="prize-popup">MENDAPATKAN : Mobil</h2>
+                <div class="no-undian">
+                    <h4 class="label-undian">Nomor Undian</h4>
+                    <div class="kotak-undian">
+                        <h2 class="message" id="winner-popup">0000</h2>
+                    </div>
+                </div>
+                <div class="hadiah">
+                    <h4 class="label-hadiah">Hadiah</h4>
+                    <div class="kotak-hadiah">
+                        <h2 class="message" id="prize-popup">Sepeda Listrik</h2>
+                    </div>
+                </div>      
             </div>
         </div>
-        <button id="close-popup" onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+        <button id="close-popup" onclick="window.dialog.close();" class="x">❌</button>
     </dialog>
 
     <div class="container-fluid"
@@ -180,6 +188,9 @@
                     }
                 });
             });
+            
+            // Select
+            $("select").select2();
 
             // Fetch stock when a gift is selected
             $("#hadiah-select").change(function() {
@@ -273,8 +284,8 @@
                         success: function(response) {
                             console.log("Data berhasil disimpan:", response);
                             console.log(selectedEvent, selectedHadiah, winner);
-                            $("#winner-popup").text("NOMOR UNDIAN: "+winner);
-                            $("#prize-popup").text("MENDAPATKAN: "+ selectedHadiahName );
+                            $("#winner-popup").text(winner);
+                            $("#prize-popup").text(selectedHadiahName );
                             showModalWithConfetti();
                         },
                         error: function(error) {
